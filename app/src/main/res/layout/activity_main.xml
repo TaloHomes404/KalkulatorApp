@@ -172,7 +172,7 @@
 
         <Button
             android:id="@+id/buttonCLR"
-            android:onClick="wcisniecieLiczby"
+            android:onClick="wcisniecieCLR"
             android:layout_margin="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"

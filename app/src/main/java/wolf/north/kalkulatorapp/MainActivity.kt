@@ -22,8 +22,13 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun wcisniecieLiczby (view: View){
-
         //BUTTON NALEŻY DO GRUPY VIEW, DEKLARUJEMY GO JAKO WARUNEK (JEŻELI VIEW TO PRZYCISK TO POBIERAMY JEGO TEKST)
         textInput?.append((view as Button).text)
     }
+
+    fun wcisniecieCLR (view: View){
+        //FUNKCJONALNOŚĆ PRZYCISKU CLR - WCIŚNIĘCIE = USUNIĘCIE CAŁEGO TEKSTU
+        textInput?.text=""
+    }
+
 }
