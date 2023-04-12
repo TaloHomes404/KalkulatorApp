@@ -31,4 +31,18 @@ class MainActivity : AppCompatActivity() {
         textInput?.text=""
     }
 
+    fun dodajCzescDziesietna(view: View){
+        //FUNKCJONALNOŚĆ PRZYCISKU "." - WCIŚNIĘCIE DODAJE DO LICZBY CZĘŚĆ DZIESIĘTNĄ
+
+        if(textInput?.text.toString().endsWith('.')){
+            return
+        }else if(textInput?.text.toString().contains('.')){
+            return
+        }else if(textInput?.text.toString().isBlank()){
+            return
+        }else{
+            textInput?.append(".")
+        }
+    }
+
 }
