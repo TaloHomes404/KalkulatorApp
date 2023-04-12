@@ -169,6 +169,15 @@
             android:layout_weight="2"
             android:text="0"
             android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/buttonDot"
+            android:onClick="dodajCzescDziesietna"
+            android:layout_margin="2dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="."
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/buttonCLR"
