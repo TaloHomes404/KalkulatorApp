@@ -53,7 +53,7 @@
 
         <Button
             android:id="@+id/buttonDivide"
-            android:onClick="wcisniecieLiczby"
+            android:onClick="wcisniecieOperatora"
             android:layout_margin="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -99,7 +99,7 @@
 
         <Button
             android:id="@+id/buttonMultiply"
-            android:onClick="wcisniecieLiczby"
+            android:onClick="wcisniecieOperatora"
             android:layout_margin="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -145,7 +145,7 @@
 
         <Button
             android:id="@+id/buttonSubtrackt"
-            android:onClick="wcisniecieLiczby"
+            android:onClick="wcisniecieOperatora"
             android:layout_margin="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -191,7 +191,7 @@
 
         <Button
             android:id="@+id/buttonSum"
-            android:onClick="wcisniecieLiczby"
+            android:onClick="wcisniecieOperatora"
             android:layout_margin="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
