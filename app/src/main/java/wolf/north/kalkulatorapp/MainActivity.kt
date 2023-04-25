@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         //DEKLARACJA ELEMENTÓW UI
         private var textInput: TextView? = null
 
-        //
+
         //FLAGA - SPRAWDZA CZY W POLU TEKSTOWYM ZNAJDUJE SIĘ NUMER NA KOŃCU
         var lastIsNumber : Boolean = false
 
@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         //
 
     }
+
+    //FUNKCJE PROGRAMU
     fun wcisniecieLiczby (view: View){
         //BUTTON NALEŻY DO GRUPY VIEW, DEKLARUJEMY GO JAKO WARUNEK (JEŻELI VIEW TO PRZYCISK TO POBIERAMY JEGO TEKST)
         //FLAGA lastIsNumber ZMIENIA NA WARTOŚĆ TRUE PONIEWAŻ WCISKAMY LICZBE- WIĘC TAKA ZNAJDUJE SIĘ NA KOŃCU TEKSTU
@@ -73,9 +75,120 @@ class MainActivity : AppCompatActivity() {
 
         //FUNCKJONALNOŚĆ KTÓRA DODAJE DO TEKSTU OPERATOR MATEMATYCZNY - Z WARUNKAMI KTÓRE SPRAWIAJĄ
         //ŻE TYLKO JEDNA OPERACJA MOŻE BYĆ WYKONANA W JEDNYM CZASIE
-        if (lastIsNumber && !czyWybranyOperator(textInput?.text.toString())){
-            textInput?.append((view as Button).text)
-            lastIsNumber = false
+        //PIERWSZY WARUNEK SPRAWDZA CZY W TEKŚCIE/NA KOŃCU NIE MA JUŻ TEGO OPERATORA
+
+        textInput?.text.let {
+            if (lastIsNumber && !czyWybranyOperator(it.toString())) {
+                textInput?.append((view as Button).text)
+                lastIsNumber = false
+            }
         }
     }
+
+    fun wcisniecieRownaSie(view: View){
+        //FUNKCJONALNOŚĆ PRZYCISKU RÓWNA SIĘ
+        //PIERWSZY WARUNEK SPRAWDZA CZY W POLU ZNAJDUJĘ SIĘ LICZBA LUB CAŁE WYRAŻENIE NP(5-2)
+        //A NASTĘPNIE ROBI Z LICZBY STRINGA KTÓREGO RODZIELA NA DWA WYRAŻENIA (1 -+/* 2)
+        //A NASTĘPNIE WYKONUJE OPERACJĘ ARYTMETYCZNĄ PRZEKSZTAŁCAJĄC JE NA DOUBLE A POTEM DO STRINGA
+        //KTÓREGO DODAJE DO POLA JAKO WYNIK KOŃCOWY OPERACJI
+
+        if(lastIsNumber){
+
+            var textWartosc = textInput?.text.toString()
+            var prefixLiczby = ""
+
+            try{
+                if(textWartosc.startsWith("-")){
+                    prefixLiczby = "-"
+                    textWartosc = textWartosc.substring(1)
+                }
+                //
+                if(textWartosc.contains("-")) {
+
+                    //SPLIT ROZDZIELA NA DWA WYRAŻENIA, PIERWSZE JEST DOPÓKI NIE SPOTKA LIMITERA(operator)
+                    var rozdzielWartosc = textWartosc.split("-")
+
+                    var pierwszeWyrazenie = rozdzielWartosc[0] // (x - y) - wartość x
+                    var drugieWyrazenie = rozdzielWartosc[1] // (x - y) - wartość y
+
+                    if(prefixLiczby.isNotEmpty()){
+                        //JEZELI PIERWSZA LICZBA BYŁA UJEMNA TO ZAMIENIAMY JĄ NA STRINGA I DODAJEMY PREFIX NA POCZATKU
+                        pierwszeWyrazenie = prefixLiczby + pierwszeWyrazenie
+                    }
+
+                    //KALKULATOR WYKONUJE SWOJE ZADANIE Z OPERACJĄ ODEJMOWANIA
+                    textInput?.text =
+                        usuniecieCzesciDziesietnej((pierwszeWyrazenie.toDouble() - drugieWyrazenie.toDouble()).toString())
+
+                }
+                else if (textWartosc.contains("+")){
+
+                    //SPLIT ROZDZIELA NA DWA WYRAŻENIA, PIERWSZE JEST DOPÓKI NIE SPOTKA LIMITERA(operator)
+                    var rozdzielWartosc = textWartosc.split("+")
+
+                    var pierwszeWyrazenie = rozdzielWartosc[0] // (x + y) - wartość x
+                    var drugieWyrazenie = rozdzielWartosc[1] // (x + y) - wartość y
+
+                    if(prefixLiczby.isNotEmpty()){
+                        //JEZELI PIERWSZA LICZBA BYŁA UJEMNA TO ZAMIENIAMY JĄ NA STRINGA I DODAJEMY PREFIX NA POCZATKU
+                        pierwszeWyrazenie = prefixLiczby + pierwszeWyrazenie
+                    }
+
+                    //KALKULATOR WYKONUJE SWOJE ZADANIE Z OPERACJĄ DODAWANIA
+                    textInput?.text =
+                        usuniecieCzesciDziesietnej((pierwszeWyrazenie.toDouble() + drugieWyrazenie.toDouble()).toString())
+
+                }
+                else if (textWartosc.contains("*")){
+
+                    //SPLIT ROZDZIELA NA DWA WYRAŻENIA, PIERWSZE JEST DOPÓKI NIE SPOTKA LIMITERA(operator)
+                    var rozdzielWartosc = textWartosc.split("*")
+
+                    var pierwszeWyrazenie = rozdzielWartosc[0] // (x * y) - wartość x
+                    var drugieWyrazenie = rozdzielWartosc[1] // (x * y) - wartość y
+
+                    if(prefixLiczby.isNotEmpty()){
+                        //JEZELI PIERWSZA LICZBA BYŁA UJEMNA TO ZAMIENIAMY JĄ NA STRINGA I DODAJEMY PREFIX NA POCZATKU
+                        pierwszeWyrazenie = prefixLiczby + pierwszeWyrazenie
+                    }
+
+                    //KALKULATOR WYKONUJE SWOJE ZADANIE Z OPERACJĄ MNOŻENIA
+                    textInput?.text =
+                        usuniecieCzesciDziesietnej((pierwszeWyrazenie.toDouble() * drugieWyrazenie.toDouble()).toString())
+
+                }
+                else if (textWartosc.contains("/")){
+
+                    //SPLIT ROZDZIELA NA DWA WYRAŻENIA, PIERWSZE JEST DOPÓKI NIE SPOTKA LIMITERA(operator)
+                    var rozdzielWartosc = textWartosc.split("/")
+
+                    var pierwszeWyrazenie = rozdzielWartosc[0] // (x / y) - wartość x
+                    var drugieWyrazenie = rozdzielWartosc[1] // (x / y) - wartość y
+
+                    if(prefixLiczby.isNotEmpty()){
+                        //JEZELI PIERWSZA LICZBA BYŁA UJEMNA TO ZAMIENIAMY JĄ NA STRINGA I DODAJEMY PREFIX NA POCZATKU
+                        pierwszeWyrazenie = prefixLiczby + pierwszeWyrazenie
+                    }
+
+                    //KALKULATOR WYKONUJE SWOJE ZADANIE Z OPERACJĄ DZIELENIA
+                    textInput?.text =
+                        usuniecieCzesciDziesietnej((pierwszeWyrazenie.toDouble() / drugieWyrazenie.toDouble()).toString())
+                }
+            }catch(e: java.lang.ArithmeticException){
+                e.printStackTrace()
+            }
+        }
+
+    }
+
+    private fun usuniecieCzesciDziesietnej(wynik: String) : String {
+        var wartosc = wynik
+
+        if(wartosc.contains(".0")) {
+            //USUNIECIE CZESCI DZIESIETNEJ, STRING WARTOŚĆ TO LICZBA BEZ .0
+            wartosc = wynik.substring(0, wynik.length - 2)
+        }
+        return wartosc
+    }
+
 }

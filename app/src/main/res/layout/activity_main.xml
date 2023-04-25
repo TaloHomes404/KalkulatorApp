@@ -208,7 +208,7 @@
         android:layout_weight="1">
         <Button
             android:id="@+id/buttonEqual"
-            android:onClick="wcisniecieLiczby"
+            android:onClick="wcisniecieRownaSie"
             android:layout_margin="2dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
